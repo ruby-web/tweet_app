@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tweet::class);
     }
+
+    public function comments()                      // commentsテーブルとのアソシエーション
+  {
+    return $this->hasMany(Comment::class);
+  }
 }

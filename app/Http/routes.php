@@ -17,20 +17,16 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::auth();
+  Route::auth();
 
-    Route::get('/','TweetsController@index'); 
+  Route::get('/','TweetsController@index');
 
-    Route::get('/tweets', 'TweetsController@index');
+  Route::resource('tweets', 'TweetsController');
 
-    Route::get('/tweets/create', 'TweetsController@create');
+  Route::resource('tweets.comments', 'CommentsController', ['only' => 'store']);
 
-    Route::post('/tweets', 'TweetsController@store');
+  Route::get('/tweets/{id}/delete', 'TweetsController@destroy');
 
-    Route::get('/tweets/{tweet_id}/edit', 'TweetsController@edit');
-    
-    Route::get('/tweets/{id}/delete', 'TweetsController@destroy');
-
-    Route::get('/users/{id}', 'UsersController@show');
+  Route::resource('users', 'UsersController', ['only' => 'show']);
 
 });
